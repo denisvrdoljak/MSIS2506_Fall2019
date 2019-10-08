@@ -1,6 +1,6 @@
 # Week 2 Assignment
 
-Make sure you have teh books by next week (week 3)!
+Make sure you have the books by next week (week 3)!
 
 
 Go through Part 3 and Part 5 here:
