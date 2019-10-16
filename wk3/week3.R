@@ -86,7 +86,7 @@ vector1
   
 
 # the colon operator creates a sequence of numbers from left to the right 
-a <- 1.2:9 
+a <- 1.2:9
 a
 # note that the end number is inclusive, unlike other languages (e.g., Python)
 
@@ -172,8 +172,6 @@ if ( test_expression1) {
 }else {
   print("if both conditions are false, this will execute")
 }
-
-
 
 
 # For Loop
