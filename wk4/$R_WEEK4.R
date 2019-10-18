@@ -137,7 +137,10 @@ df = readWorksheet(wk, sheet="Sheet1")
 
 # Write 
 
-x <- matrix(1:10, ncol = 5) fil <- tempfile("data") 
+x <- matrix(1:10, ncol = 5) 
+fil <- tempfile("data") 
+
+
 
 
 
