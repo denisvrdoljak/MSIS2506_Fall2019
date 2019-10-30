@@ -1,0 +1,202 @@
+---
+title: "R Notebook"
+output:
+  html_notebook: default
+  html_document: default
+---
+
+This is needed for publishing
+
+```{r setup}
+
+library(dygraphs)
+library(leaflet)
+```
+# Introduction
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button (green arrow) within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+
+```{r this is a comment, followed by code}
+numbers <- seq_len(25)
+numbers
+```
+
+# Running Code
+
+ To help see the progress RStudio draws an indicator in the editor gutter. 
+
+```{r progress}
+Sys.sleep(1); runif(3)
+Sys.sleep(1); runif(3)
+Sys.sleep(1); runif(3)
+Sys.sleep(1); runif(3)
+Sys.sleep(1); runif(3)
+```
+
+To run portions of your chunk,  *Ctrl+Enter* (OS X: *Cmd+Enter*) to run chunk line by line.
+
+```{r linewise}
+max.temp <- c(22, 27, 26, 24, 23, 26, 28)
+max.temp
+
+par(mfrow=c(1,2))    # set the plotting area into a 1*2 array
+barplot(max.temp, main="Barplot")
+pie(max.temp, main="Piechart", radius=1)
+```
+
+## Creating a chunk
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+```{r}
+
+```
+
+
+Add the R code to the chunk
+
+```{r data frame}
+ll <- list (list(1:3), list(4:6), list(7:9))
+df <- as.data.frame(ll)
+df
+```
+## Graphical Output
+
+Adding another chunk to produce graphics.
+
+```{r graphics}
+max.temp <- c(22, 27, 26, 24, 23, 26, 28)
+
+barplot(max.temp,
+        main = "Maximum Temperatures in a Week",
+        xlab = "Degree Celsius",
+        ylab = "Day",
+        names.arg = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
+        col = "darkred",
+        horiz = TRUE)
+
+```
+
+You can create more complex graphical/numeric output. Note separation of graphic and numeric output. Numeric output is actually the R Console.
+
+```{r}
+max.temp <- c(22, 27, 26, 24, 23, 26, 28)
+max.temp
+par(mfrow=c(1,2))    # set the plotting area into a 1*2 array
+barplot(max.temp, main="Barplot")
+pie(max.temp, main="Piechart", radius=1)
+```
+
+## Additional examples
+
+Bar plots created using the barplot() function
+
+```{r}
+max.temp <- c(22, 27, 26, 24, 23, 26, 28)
+
+barplot(max.temp)
+
+barplot(max.temp,
+        main = "Maximum Temperatures in a Week",
+        xlab = "Degree Celsius",
+        ylab = "Day",
+        names.arg = c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
+        col = "darkred",
+        horiz = TRUE)
+```
+
+
+
+Plotting Categorical Data
+
+```{r}
+age <- c(17,18,18,17,18,19,18,16,18,18)
+ 
+table(age)
+barplot(table(age),
+        main="Age Count of 10 Students",
+        xlab="Age",
+        ylab="Count",
+        border="red",
+        col="blue",
+        density=10
+)
+```
+
+
+
+HISTOGRAM
+
+```{r}
+str(airquality)
+
+Temperature <- airquality$Temp
+hist(Temperature)
+
+hist(Temperature,
+     main="Maximum daily temperature at La Guardia Airport",
+     xlab="Temperature in degrees Fahrenheit",
+     xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+```
+
+
+
+
+BLOCKS BOX
+
+```{r}
+# prepare the data
+ozone <- airquality$Ozone
+temp <- airquality$Temp
+# gererate normal distribution with same mean and sd
+ozone_norm <- rnorm(200,mean=mean(ozone, na.rm=TRUE), sd=sd(ozone, na.rm=TRUE))
+temp_norm <- rnorm(200,mean=mean(temp, na.rm=TRUE), sd=sd(temp, na.rm=TRUE))
+ boxplot(ozone, ozone_norm, temp, temp_norm,
+        main = "Multiple boxplots for comparision",
+        at = c(1,2,4,5),
+        names = c("ozone", "normal", "temp", "normal"),
+        las = 2,
+        col = c("orange","red"),
+        border = "brown",
+        horizontal = TRUE,
+        notch = TRUE
+)
+```
+
+
+
+3D Plot
+
+```{r}
+cone <- function(x, y){
+    sqrt(x^2+y^2)
+}
+x <- y <- seq(-1, 1, length= 20)
+z <- outer(x, y, cone)
+persp(x, y, z)
+```
+
+
+
+## Alternate Engines
+
+By default, R notebook chunks will be run using R. It is possible to write chunks that use other engines to execute. For instance, you can add some Python to your notebook:
+
+```{r python, engine='python'}
+for i in range(10):
+    print("Your next number is: {}".format(i))
+print()
+print("NOTE: Python counts from 0, not 1!")
+```
+
+
+# Saving and Sharing
+
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
