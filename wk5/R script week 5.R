@@ -56,8 +56,8 @@ margin.table(Titanic)  # gives total count if index is not provided
 
 #margin.table(Titanic,2)
 
-t.data <- margin.table(Titanic,3:4)
-t.data
+titanic.data <- margin.table(Titanic,3:4)
+titanic.data
 
 barplot(titanic.data,
         main = "Survival of Each Class",
