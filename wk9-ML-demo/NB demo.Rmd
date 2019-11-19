@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Required library, we are going to use dataset that had student's GRE score and their admittance
+
+```{r}
+library(naivebayes)
+library(dplyr)
+library(psych)
+```
+
+Load the data we need ----> 
+
+```{r}
+data <- read.csv(file.choose(), header = T)
+str(data)
+```
+convert variables to factor variable
+```{r}
+data$rank <- as.factor(data$rank)
+data$admit <- as.factor(data$admit)
+```
+use random seeding and create training 80% and testing 20% data sets
+```{r}
+set.seed(1234)
+ind <- sample(2, nrow(data), replace = T, prob = c(0.8, 0.2))
+train <- data[ind == 1,]
+test <- data[ind == 2,]
+```
+
+build the NB model, as admit depends on all variables here, use training data
+
+```{r}
+model <- naive_bayes(admit ~ ., data = train)
+model
+```
+Test for accuracy in training data set, 70% accurate
+```{r}
+p1 <- predict(model, train)
+(tab1 <- table(p1, train$admit))
+sum(diag(tab1)) / sum(tab1)
+```
+Decision tree with party, seems like GPA is the most determining variable....
+```{r}
+library(party)
+tree <- ctree(admit ~., data = train)
+tree
+plot(tree)
+```
+Test for accuracy, 72%
+```{r}
+pt <- predict(tree, train)
+(tab2 <- table(pt, train$admit))
+sum(diag(tab2)) / sum(tab2)
+```
+
+
+
+
+
