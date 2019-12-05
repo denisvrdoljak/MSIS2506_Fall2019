@@ -1,0 +1,135 @@
+---
+title: 'R Programming: Take Home MidTerm'
+author: "Denis Vrdoljak"
+date: "Dec 4, 2019"
+
+output: html_notebook
+---
+
+Complete the following questions, then submit this R Notebook with your work on Camino.
+
+QUESTION 1
+
+Load the dataset arquality and show days im June when temperature was higher then 70..
+```{r}
+## Student code goes here
+data(airquality)
+sub <- subset(airquality, Month == 6 & Temp > 70)
+sub
+## Student code goes here
+```
+
+QUESTION 2
+
+Load the table fillna.txt and 
+a) create a vector of NA counts by column
+b) create a vector of NA counts by row
+
+```{r}
+## Student code goes here
+mydata = read.table("fillna.txt")
+count_col_na <- colSums(is.na(mydata))
+print("Vector of NA counts by column: ")
+count_col_na
+count_row_na <- rowSums(is.na(mydata))
+print("Vector of NA counts by row: ")
+count_row_na
+
+## Student code goes here
+```
+
+QUESTION 3
+
+Load the orange dataset, and show the structure of the table.
+
+```{r}
+## Student code goes here
+data("Orange")
+str(Orange)
+## Student code goes here
+```
+
+QUESTION 4
+Load the ggplot2 library. Next, load the 'diamonds' dataset. (Note you may use dplyr for these questions, but do not need to.)
+
+Plot the diamonds' clarity by price (PART A)
+
+```{r}
+## Student code goes here
+
+library(ggplot2)
+
+ggplot(diamonds, aes(factor(clarity), price, fill=clarity)) + geom_boxplot() + ggtitle("Diamond Clarity by Price") + xlab("Clarity") + ylab("Diamond Price ($)") + coord_cartesian(ylim=c(0,6500))
+## Student code goes here
+```
+
+
+Show the last 4 rows of data (PART B)
+
+```{r}
+## Student code goes here
+print(tail(diamonds, n=4))
+## Student code goes here
+```
+
+
+Show the median price  (PART C)
+
+```{r}
+## Student code goes here
+print(median(diamonds$price))
+## Student code goes here
+```
+
+QUESTION 5
+
+Load the Orange dataset, and perform the following analyses. Organize your work and present your answers with separate R Notebook cells.
+
+a. Do a simple scatterplot of Age vs circumference.
+
+```{r}
+## Student code goes here
+data("Orange")
+plot(Orange$age,Orange$circumference)
+## Student code goes here
+```
+b. Make a stripchart of age
+
+```{r}
+## Student code goes here
+stripchart(Orange$age,
+           main = "Stripchart of Age",
+           ylab = "Age")
+## Student code goes here
+```
+c. Change the graph from part (a) as follows:
+1. Use orange dots
+2. Label the graph exercise one as:
+-- Title = Tree Age vs circumference
+-- X axis = Age
+-- Y axis = circumference of Tree
+
+```{r}
+## Student code goes here
+plot(Orange$age, Orange$circumference,
+     main = "Tree Age vs Circumference",
+     xlab = "Age", 
+     ylab = "Circumference",
+     col  = "orange")
+## Student code goes here
+```
+
+QUESTION 6
+Using the Diamond dataset again, create a graph that shows the distribution of values for the diamond prices column. 
+```{r}
+
+qplot(x = diamonds$price,data = diamonds,
+        binwidth = 100,
+      breaks = c(0,500,1000,1500,2000,3000,4000,5000,7500,10000,15000,20000),
+        xlab = "Diamond Price",
+        ylab = "Count",
+        main = "Diamond Price Distribution",
+        col = I("green"))   
+ 
+```
+

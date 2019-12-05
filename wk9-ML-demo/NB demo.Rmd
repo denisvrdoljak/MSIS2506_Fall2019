@@ -38,8 +38,8 @@ model
 ```
 Test for accuracy in training data set, 70% accurate
 ```{r}
-p1 <- predict(model, train)
-(tab1 <- table(p1, train$admit))
+p1 <- predict(model, test)
+(tab1 <- table(p1, test$admit))
 sum(diag(tab1)) / sum(tab1)
 ```
 Decision tree with party, seems like GPA is the most determining variable....

@@ -1,0 +1,163 @@
+---
+title: 'R Programming: Take Home MidTerm'
+author: "Denis Vrdoljak"
+date: "Dec 4, 2019"
+
+output: html_notebook
+---
+
+QUESTION 1
+
+Complete the following questions, then submit this R Notebook with your work on Camino.
+
+Load the data in the file "fillna.txt", replace the NA's with "unknown" and save to a new file called "cleaned.txt"
+```{r}
+## Student code goes here
+#set a wd
+
+data = read.table("fillna.txt")
+data[is.na(data)] <- "unknown"
+head(data)
+write.table(data, file = "cleaned.txt", row.names = FALSE, col.names = FALSE)
+
+## Student code goes here
+```
+
+QUESTION 2
+
+Load the table fillna.txt and 
+a) create a vector of NA counts by column
+b) create a vector of NA counts by row
+
+```{r}
+## Student code goes here
+
+mydata = read.table("fillna.txt")
+count_col_na <- colSums(is.na(mydata))
+print("Vector of NA counts by column: ")
+count_col_na
+count_row_na <- rowSums(is.na(mydata))
+print("Vector of NA counts by row: ")
+count_row_na
+
+## Student code goes here
+```
+
+QUESTION 3
+
+Load the mtcars dataset, and show the structure of the table.
+
+```{r}
+## Student code goes here
+data("mtcars")
+str(mtcars)
+
+## Student code goes here
+```
+
+
+QUESTION 4
+Load the airquality dataset and show the first 7 rows. (PART A)
+
+```{r}
+## Student code goes here
+data("airquality")
+head(airquality,7)
+
+
+## Student code goes here
+```
+
+
+... and show the last 4 rows of data (PART B)
+
+```{r}
+## Student code goes here
+tail(airquality,4)
+
+
+## Student code goes here
+```
+
+
+Show data for the month of May (PART C)
+
+```{r}
+## Student code goes here
+library("dplyr")
+mayData <- airquality %>%
+  filter(Month == 5)
+
+mayData
+
+## Student code goes here
+```
+
+QUESTION 5
+
+Load the Orange dataset, and perform the following analyses. Organize your work and present your answers with separate R Notebook cells.
+
+a. Do a simple scatterplot of Age vs circumference.
+b. Make a stripchart of age
+c. Change the graph from part (a) as follows:
+1. Use red dots
+2. Label the graph from exercise one as:
+-- Title = Tree Age vs circumference
+-- X axis = age
+-- Y axis = circumference of tree
+
+** STUDENT CODE CELLS SHOULD GO HERE. Create your own cells! **
+
+Load the Orange dataset, and perform the following analyses. Organize your work and present your answers with separate R Notebook cells.
+```{r}
+#downloading dataset
+data("Orange")
+#showing data
+head(Orange)
+```
+
+a. Do a simple scatterplot of Age vs circumference.
+```{r} 
+
+plot(Orange$age,Orange$circumference)
+ 
+```
+
+b. Make a stripchart of age
+```{r}
+stripchart(Orange$age)
+
+```
+
+c. Change the graph from part (a) as follows:
+1. Use red dots
+2. Label the graph from exercise one as:
+-- Title = Tree Age vs circumference
+-- X axis = age
+-- Y axis = circumference of tree
+```{r}
+ 
+plot(Orange$age, Orange$circumference,
+     main = "Tree Age vs circumference",
+     xlab = "Age", 
+     ylab = "circumference of Tree",
+     col  = "orange")
+```
+
+QUESTION 6
+Using the Orange Dataset again, create a graph that shows the distribution of values of the circumference column
+
+```{r}
+## Student code goes here
+
+x <- Orange$circumference
+h<-hist(x, breaks=25, xlab="Circumference",
+   main="Distribution of the Circumference")
+xfit<-seq(min(x),max(x),length=40)
+yfit<-dnorm(xfit,mean=mean(x),sd=sd(x))
+yfit <- yfit*diff(h$mids[1:2])*length(x)
+lines(xfit, yfit, col="blue", lwd=2)
+lines(density(Orange$circumference), col="blue", lwd=2)
+
+## Student code goes here
+```
